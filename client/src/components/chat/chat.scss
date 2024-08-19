@@ -1,0 +1,41 @@
+.chat{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 3%;
+    overflow: auto;
+    .sender{
+        display: flex;
+        flex-direction: row;
+        align-self: end;
+        align-items: center;
+        width: max-content;
+        max-width: 200px;
+        background-color: rgb(9, 141, 130);
+        border: 0;
+        border-radius: 10px 10px 0 10px;
+        padding: 10px;
+        span{
+            color: rgb(230, 239, 240);
+            font-size: 1rem;
+        }
+    }
+    .receiver{
+        display: flex;
+        flex-direction: row;
+        align-self: start;
+        align-items: center;
+        width: max-content;
+        max-width: 200px;
+        background-color: #4899db;
+        border: 0;
+        border-radius: 10px 10px 10px 0;
+        padding: 10px;
+        span{
+            
+            color: #d6e1e9;
+            font-size: 1rem;
+        }
+    }
+}

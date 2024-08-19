@@ -1,0 +1,93 @@
+.updateprofile {
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+  padding: 20px;
+  background-color: #ebebeb;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: sans-serif;
+  margin: 2% 0 3%;
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .updatecontainer {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+
+    .updateleft {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 70%;
+    }
+
+    .updateitem {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        outline-color: #7d99b8;
+        color: #333;
+      }
+    }
+
+    .updateright {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+      justify-content: space-evenly;
+      padding-inline: 10px;
+      .updateImg,
+      .shareImg {
+        display: inline-block;
+        padding: 60px 60px;
+        background-color: #5a80a8;;
+        color: white;
+        border-radius: 5px;
+        border: #7e7d7d 1px solid;
+        cursor: pointer;
+        text-align: center;
+
+        &:hover {
+          background-color: #6f9dce;
+          transition: 0.3s;
+        }
+      }
+    }
+  }
+  .updatebuttons {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      border: none;
+      width: 50%;
+      border-radius: 5px;
+      background-color: #5a9a9e;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+
+      &:hover {
+        background-color: #67c2c9;
+      }
+    }
+  }
+}

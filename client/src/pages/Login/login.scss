@@ -1,0 +1,81 @@
+.login {
+  height: 100vh;
+  font-family: sans-serif;
+  background-color: rgba(68, 127, 238, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .container {
+    display: flex;
+    background-color: white;
+    width: 50%;
+    min-height: 60%;
+    border-radius: 20px;
+    overflow: hidden;
+    .left {
+      flex:1;
+      background: linear-gradient(rgba(68, 127, 238, 0.4),rgba(68, 127, 238, 0.4)), url("https://cdn.pixabay.com/photo/2018/08/15/10/13/network-3607641_1280.jpg") center;
+      background-size: cover;
+      padding:50px;
+      display: flex;
+      flex-direction: column;
+      gap:20px;
+      color:#ffffff;
+
+      h1 {
+        font-size: 5rem;
+        line-height: 5rem;
+      }
+      p {
+
+      }
+      button {
+        width: 50%;
+        padding: 3%;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        background-color: #ffffff;
+        color:rgb(77, 133, 179);
+        cursor: pointer;
+      }
+    }
+    .right {
+      flex:1;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap:30px;
+      justify-content: center;
+
+      h1 {
+        font-size: 2rem;
+        color:#636161;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        input {
+          border: none;
+          border-bottom: 2px solid lightblue;
+          padding: 20px 10px;
+          outline: none;
+          font-size: 1rem;
+        }
+        
+        button {
+          width: 50%;
+          padding: 15px;
+          border: none;
+          border-radius: 10px;
+          color: rgb(255, 255, 255);
+          background-color: rgb(77, 133, 179);
+          font-weight: bold;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

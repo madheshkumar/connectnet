@@ -1,0 +1,71 @@
+.comments {
+  .userImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1f5ba0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: #1f5ba0 1px solid;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: white;
+    }
+    #defaultprofile {
+      padding:5px;
+      font-size: 30px;
+      color: #ffffff;
+    }
+  }
+  .write {
+    display: flex;
+    gap: 2%;
+    justify-content: space-between;
+    margin: 3% 0;
+    input {
+      flex:5;
+      padding: 10px;
+      border: none;
+      outline: 2px solid #59b4e9;
+      border-radius: 5px;
+    }
+    input:focus{
+        outline: 2px solid #0085d1;
+    }
+    button{
+        background-color:#59b4e9;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 1%;
+        cursor: pointer;
+    }
+  }
+  .comment {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin: 3% 0;
+
+    .info {
+      flex: 6;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      font-size: smaller;
+      gap:1px;
+      span {
+        font-weight: 600;
+      }
+    }
+    .date {
+      font-size: smaller;
+      color: #424242;
+      align-self: center;
+    }
+  }
+}

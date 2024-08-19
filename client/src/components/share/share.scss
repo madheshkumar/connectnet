@@ -1,0 +1,100 @@
+.share {
+  padding: 2% 0;
+
+  .container {
+    font-family: sans-serif;
+    -webkit-box-shadow: 1px 1px 20px 1px rgba(34, 34, 34, 0.5);
+    -moz-box-shadow: 1px 1px 20px 1px rgba(48, 47, 47, 0.5);
+    box-shadow: 1px 1px 20px 1px rgba(58, 58, 58, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    .shareTop {
+      padding: 20px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      height: 10vh;
+      border-radius: 10px;
+      .userImg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #27a191;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: #27a191 2px solid;
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+          background-color: white;
+        }
+        #defaultprofile {
+          padding:5px;
+          font-size: 30px;
+          color: #ffffff;
+        }
+      }
+      .textInput {
+        background-color: transparent;
+        width: 100%;
+        padding: 20px 10px;
+        border: none;
+        outline: none;
+        border-bottom: 2px #325e61 solid;
+        font-size: 16px;
+        font-family: sans-serif;
+      }
+      .shareImg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .icon {
+          width: 50px;
+          height: 50px;
+          object-fit: cover;
+          cursor: pointer;
+        }
+      }
+
+      .sharebtn {
+        background-color: #325e61;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+    }
+    .shareBottom {
+      .uploadedfile {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        align-items: center;
+        gap: 20px;
+        .videoFile {
+          width: 100px;
+          object-fit: cover;
+        }
+        .imgFile {
+          width: 100px;
+          object-fit: cover;
+        }
+        p {
+          color: #325e61;
+          font-weight: bold;
+          font-size: 16px;
+          font-family: sans-serif;
+        }
+      }
+    }
+  }
+}

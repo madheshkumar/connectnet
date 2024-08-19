@@ -1,0 +1,105 @@
+.leftbar {
+  flex: 2;
+  font-family: sans-serif;
+  background-color: #c9d6df;
+  height: calc(100vh - 70px);
+  position: sticky;
+  top: 70px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .container {
+    padding: 30px;
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      #subtitle {
+        padding: 5%;
+        font-size: 0.9em;
+        font-weight: 700;
+        color: rgb(106, 121, 129);
+      }
+      .user,
+      .friend {
+        display: flex;
+        align-items: center;
+        gap: 10%;
+        cursor: pointer;
+
+        .userImg {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #1f5ba0;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: #1f5ba0 1px solid;
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: white;
+          }
+          #defaultprofile {
+            padding: 5px;
+            font-size: 30px;
+            color: #ffffff;
+          }
+        }
+        span {
+          color: #353535;
+          font-weight: 700;
+        }
+      }
+      .items {
+        display: flex;
+        align-items: center;
+        gap: 10%;
+        cursor: pointer;
+        img {
+          width: 40px;
+          padding: 3px;
+        }
+        span {
+          color: #353535;
+          font-weight: 600;
+        }
+      }
+      .friends {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        border-radius: 7px;
+        background-color: #8aa5be;
+        height: max-content;
+        max-height: 170px;
+        padding: 5px;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        
+        .friend {
+          display: flex;
+          align-items: center;
+          padding: 5px 10px;
+          background-color: #e9f3fa;;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .friend:hover{
+          background-color: #d6e8f5;
+          transition: ease-in-out 0.2s;
+        }
+      }
+    }
+    hr {
+      border: none;
+      height: 0.1em;
+      background-color: #b1b2b3;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.posts{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    
+    .postmessage{
+        font-size: x-large;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        color: #325e61;
+        padding: 20px;
+    }
+}

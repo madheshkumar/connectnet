@@ -1,0 +1,27 @@
+.message{
+    display: flex  ;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+
+    input{
+        flex:4;
+        font-size: 0.9rem;
+        padding: 2% 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #f7f1f1;
+        color: #35383a;
+    }
+    button{
+        font-size: 0.9rem;
+        border: none;
+        border-radius: 5px;
+        padding: 1% 2%;
+        cursor: pointer;
+        background-color:  rgb(7, 119, 110);;
+        color: #dfe6eb;
+    }
+}

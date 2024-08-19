@@ -1,0 +1,188 @@
+.rightbar {
+  flex: 3;
+  font-family: sans-serif;
+  background-color: #f0f5f9;
+  height: calc(100vh - 70px);
+  position: sticky;
+  top: 70px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .container {
+    padding: 4%;
+
+    .item {
+      -webkit-box-shadow: 1px 1px 26px 1px rgba(0, 0, 0, 0.5);
+      -moz-box-shadow: 1px 1px 26px 1px rgba(0, 0, 0, 0.5);
+      box-shadow: 1px 1px 26px 1px rgba(0, 0, 0, 0.5);
+      background-color: #5f707c;
+      border-radius: 5px;
+      padding: 5%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 3%;
+      span {
+        color: rgb(235, 230, 230);
+        font-size: 1rem;
+      }
+      .suggestContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: max-content;
+        max-height: 10vh;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      .user {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        .userinfo {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          gap: 10px;
+
+          .userImg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1f5ba0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: #ffffff 1px solid;
+            img {
+              width: 30px;
+              height:30px;
+              border-radius: 50%;
+              object-fit: cover;
+              background-color: white;
+            }
+            #defaultprofile {
+              font-size: 25px;
+              color: #eeeff0;
+            }
+            p {
+              color: #afadad;
+              font-size: 0.9rem;
+            }
+            span {
+              font-weight: 500;
+              color: #f0f5f9;
+            }
+          }
+        }
+
+        .buttons {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          gap: 10px;
+          button {
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+
+            cursor: pointer;
+
+            &:first-child {
+              background-color: #2c2c2c;
+              color: #f0f5f9;
+            }
+            &:first-child:hover {
+              background-color: #1f1f1f;
+              transition: ease-in-out 0.2s;
+            }
+            &:last-child {
+              background-color: #e0e0e0;
+              color: black;
+            }
+            &:last-child:hover {
+              background-color: #c4c4c4;
+              transition: ease-in-out 0.2s;
+            }
+          }
+        }
+      }
+    }
+    .chatbox {
+      -webkit-box-shadow: 1px 1px 26px 1px rgba(0, 0, 0, 0.5);
+      -moz-box-shadow: 1px 1px 26px 1px rgba(0, 0, 0, 0.5);
+      box-shadow: 1px 1px 26px 1px rgba(0, 0, 0, 0.5);
+      background-color: #eaf0f5;
+      border-radius: 5px;
+
+      width: auto;
+      height: 42vh;
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      #chattitle {
+        position: sticky;
+        top: 0px;
+        background-color: #5f707c;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f0f5f9;
+        font-size: 1rem;
+      }
+      .user {
+        .userinfo {
+          background-color: #dceaf7;
+          padding: 2% 10px;
+          display: flex;
+          flex-direction: row;
+          justify-content: start;
+          align-items: center;
+          border-bottom: 2px solid #517288;
+          gap: 10px;
+          cursor: pointer;
+          .userImg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1f5ba0;
+            padding: 4px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: #1f5ba0 1px solid;
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              object-fit: cover;
+              background-color: white;
+            }
+            #defaultprofile {
+              padding: 5px;
+              font-size: 30px;
+              color: #ffffff;
+            }
+          }
+          span {
+            font-weight: 500;
+            color: #056b55;
+          }
+        }
+        .userinfo:hover {
+          background-color: #9bcff0;
+          transition: ease-in-out 0.2s;
+        }
+      }
+    }
+  }
+}
