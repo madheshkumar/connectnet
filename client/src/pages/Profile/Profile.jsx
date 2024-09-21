@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./profile.scss";
-import { AuthContext, checkImageURL } from "../../context/AuthContext";
+import { AuthContext, checkImageURL} from "../../context/AuthContext";
 import UpdateProfile from "../../components/updateprofile/UpdateProfile";
 import Posts from "../../components/posts/Posts";
 
@@ -29,7 +29,7 @@ const formatDate = (dateString) => {
 };
 
 const Profile = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, getFriends } = useContext(AuthContext);
   const [updateUser, setUpdateUser] = useState(false);
   const [friends, setFriends] = useState([]);
   const userid = useLocation().pathname.split("/")[2];
@@ -44,11 +44,20 @@ const Profile = () => {
 
   const isFriend = data ? friends : false;
 
-  useEffect(() => {
-    makeRequest.get("/users/friendid/" + currentUser.id).then((res) => {
-      setFriends(res.data.map((friend) => friend.friendid));
-    });
+  useEffect(()=> {
+    fetchFriends();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
+
+  const fetchFriends = async () => {
+    try {
+      const res = await getFriends();
+      setFriends(res.map((friend) => friend.id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   if (isPending) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -76,7 +85,7 @@ const Profile = () => {
           }
         </div>
       </div>
-      <div className="profilecontainer">
+      <div className="profileContainer">
         <span id="name">{data.name}</span>
         <span id="dob">{data.DOB ? formatDate(data.DOB) : "No DOB info!"}</span>
         <div className="userinfo">

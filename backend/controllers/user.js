@@ -44,8 +44,7 @@ export const getFriendids = (req, res) => {
 
   db.query(q, [userId], (err, data) => {
     if (err) return res.status(500).json(err);
-    if (data.length === 0) return res.status(404).json("No friends found!");
-
+    // if (data.length === 0) return res.status(404).json("No friends found!");
     return res.status(200).json(data);
   });
 };
@@ -92,6 +91,7 @@ export const updateUser = (req, res) => {
 
   // Remove the last comma and space
   query = query.slice(0, -2);
+
 
   // Add the WHERE clause
   query += " WHERE id = ?";

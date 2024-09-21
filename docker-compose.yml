@@ -1,0 +1,58 @@
+services:
+  backend:
+    build:
+      args:
+      - NODE_ENV=development
+      context: backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8800:80"
+    volumes:
+      - ./backend:/usr/src/app:ro
+      - ./backend/package.json:/usr/src/package.json
+      - ./backend/package-lock.json:/usr/src/package-lock.json
+      - backend-modules:/opt/app/node_modules
+    networks:
+      - public
+      - private
+    depends_on:
+      - db 
+  db:
+    image: mysql
+    restart: always
+    networks:
+      - private
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes: 
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: connectnet
+      MYSQL_ROOT_PASSWORD: Madhesh@17
+    
+  frontend:
+    build:
+      context: client
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/usr/src/app:rw
+      - /code/node_modules
+    networks:
+      - public
+    depends_on:
+      - backend
+networks:
+  public:
+  private:
+volumes:
+  backend-modules:
+  db-data:
+
+
+
+
+

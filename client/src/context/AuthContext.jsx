@@ -9,8 +9,6 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-
-
   const getFriends = async () => {
     try {
       const res = await axios.get(

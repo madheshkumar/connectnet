@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./updateprofile.scss";
 
 import { AuthContext } from "../../context/AuthContext";
@@ -6,11 +6,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 
 const UpdateProfile = ({ setupdate }) => {
-  const { currentUser, setCurrentUser ,login} = useContext(AuthContext);
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
 
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
-  const [phoneno, setPhone] = useState("");
   const [website, setWebsite] = useState("");
   const [location, setLocation] = useState("");
   const [coverpic, setCoverpic] = useState(null);
@@ -40,39 +39,42 @@ const UpdateProfile = ({ setupdate }) => {
     if (profilepic) URL2 = await uploadProfile();
 
     const updateData = {};
-    if (name !== currentUser.name || currentUser.name === null || name !== "")
+    if (
+      (name !== currentUser.name && name.length !== 0) ||
+      currentUser.name === null
+    ) {
       updateData.name = name;
-    if (dob !== currentUser.dob || currentUser.DOB === null || dob !== "")
+    }
+    if (
+      (dob !== currentUser.dob && dob.length !== 0) ||
+      currentUser.DOB === null
+    ) {
       updateData.dob = dob;
+    }
+
     if (
-      phoneno !== currentUser.phoneno ||
-      currentUser.phoneno === null ||
-      phoneno !== ""
-    )
-      updateData.phoneno = phoneno;
-    if (
-      website !== currentUser.website ||
-      currentUser.website === null ||
-      website !== ""
-    )
+      (website !== currentUser.website && website.length !== 0) ||
+      currentUser.website === null
+    ) {
       updateData.website = website;
+    }
     if (
-      location !== currentUser.location ||
-      currentUser.location === null ||
-      location !== ""
-    )
+      (location !== currentUser.location && location.length !== 0) ||
+      currentUser.location === null
+    ) {
       updateData.location = location;
+    }
+
     if (URL1) updateData.coverpic = URL1;
     if (URL2) updateData.profilepic = URL2;
 
-    console.log(updateData);
+    // console.log(updateData);
     if (Object.keys(updateData).length === 0) return;
 
     mutation.mutate(updateData);
 
     setName("");
     setDob("");
-    setPhone("");
     setWebsite("");
     setLocation("");
     setCoverpic(null);
@@ -124,15 +126,6 @@ const UpdateProfile = ({ setupdate }) => {
               placeholder="DOB"
               value={dob}
               onChange={(e) => setDob(e.target.value)}
-            />
-          </div>
-          <div className="updateitem">
-            <label>Phone</label>
-            <input
-              type="text"
-              placeholder="Phone"
-              value={phoneno}
-              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           <div className="updateitem">

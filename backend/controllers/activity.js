@@ -20,7 +20,7 @@ export const logActivity = (req, res) => {
   db.query(q, [userId, activity, type], (err, data) => {
     if (err) return res.status(500).json(err);
 
-    return res.status(201).json(data);
+    return res.status(200).json(data);
   });
 };
 

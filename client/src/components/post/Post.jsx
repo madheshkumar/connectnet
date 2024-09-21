@@ -25,6 +25,8 @@ const Post = ({ post }) => {
   const [commentsCount, setCommentsCount] = useState(0);
   const [likes, setLikes] = useState(0);
 
+  const [showOptions, setShowOptions] = useState(false);
+
   const fetchLikes = async () => {
     try {
       const res = await makeRequest.get(`/likes?postId=${post.id}`);
@@ -43,6 +45,7 @@ const Post = ({ post }) => {
       console.log(err);
     }
   };
+
 
   useEffect(() => {
     fetchLikes();
@@ -108,6 +111,19 @@ const Post = ({ post }) => {
     };
   }, []);
 
+  const handleMoreOptions = () => {
+    setShowOptions(!showOptions);
+  };
+
+  const handleDelete = async() => {
+    try{
+      await makeRequest.delete(`/posts/${post.id}`);
+      window.location.reload();
+    }catch(err){
+      console.log(err);
+    } 
+  };
+
   return (
     <div className="post">
       <div className="container">
@@ -130,7 +146,17 @@ const Post = ({ post }) => {
               <span className="date">{moment(post.createdAt).fromNow()}</span>
             </div>
           </div>
-          <MoreVertIcon />
+          <div className="moreIcon">
+            <MoreVertIcon onClick={handleMoreOptions} />
+            {showOptions && (
+              <div className="options">
+                <ul>
+                  <li>Edit</li>
+                  <li onClick={handleDelete}>Delete</li>
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
         <div className="content">
           <p>{post.desc}</p>

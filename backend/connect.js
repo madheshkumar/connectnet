@@ -1,12 +1,14 @@
-import mysql from "mysql";
+import mysql from "mysql2";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 export const db = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: process.env.DB_PASSWORD,
+  // host: 'db',
+  host: '127.0.0.1',
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: 'connectnet'
 });
 
 db.connect((err) => {
@@ -151,3 +153,4 @@ db.query(query6, (err, result) => {
   if (err) console.log(err);
 });
 
+console.log("Connected to the database");
