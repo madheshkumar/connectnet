@@ -28,7 +28,7 @@ export const getUser = (req, res) => {
 
 export const getFriendDetails = (req, res) => {
   const userId = req.params.userId;
-  //console.log(userId);
+ 
   const q = `SELECT * FROM users where id = any(select friendid from relations where userid = ? );`;
 
   db.query(q, [userId], (err, data) => {
@@ -39,12 +39,12 @@ export const getFriendDetails = (req, res) => {
 
 export const getFriendids = (req, res) => {
   const userId = req.params.userId;
-  //console.log(userId);
+
   const q = `select friendid from relations where userid = ? ;`;
 
   db.query(q, [userId], (err, data) => {
     if (err) return res.status(500).json(err);
-    // if (data.length === 0) return res.status(404).json("No friends found!");
+    if (data.length === 0) return res.status(404).json("No friends found!");
     return res.status(200).json(data);
   });
 };
@@ -53,13 +53,10 @@ export const updateUser = (req, res) => {
   const userId = req.params.userId;
   const { name, dob, phoneno, website, location, coverpic, profilepic } =
     req.body;
-  //const q = `UPDATE users SET name = ?, DOB = ?, phoneno = ?, website = ?, city = ?, coverpic = ?, profilepic = ? WHERE id = ?;`;
 
-  // Initialize query parts
   let query = "UPDATE users SET ";
   const queryParams = [];
 
-  // Dynamically build the query based on provided fields
   if (name) {
     query += "name = ?, ";
     queryParams.push(name);
@@ -89,11 +86,8 @@ export const updateUser = (req, res) => {
     queryParams.push(profilepic);
   }
 
-  // Remove the last comma and space
   query = query.slice(0, -2);
 
-
-  // Add the WHERE clause
   query += " WHERE id = ?";
   queryParams.push(userId);
 

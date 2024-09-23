@@ -1,4 +1,5 @@
 import { db } from "../connect.js";
+import moment from "moment/moment.js";
 
 export const getActivities = (req, res) => {
   const userId = req.params.userId;
@@ -6,20 +7,17 @@ export const getActivities = (req, res) => {
 
   db.query(q, userId, (err, data) => {
     if (err) return res.status(500).json(err);
-    if (data.length === 0) return res.status(404).json("No activities found!");
-
     return res.status(200).json(data);
   });
 };
 
-
 export const logActivity = (req, res) => {
-  const { userId, activity, type } = req.body;
-  const q = `INSERT INTO activities (userid, activity, type) VALUES (?, ?, ?);`;
+  const { userId, activity } = req.body;
+  const time = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
+  const q = `INSERT INTO activities (userid, activity, time) VALUES (?, ?, ?);`;
 
-  db.query(q, [userId, activity, type], (err, data) => {
+  db.query(q, [userId, activity, time], (err, data) => {
     if (err) return res.status(500).json(err);
-
     return res.status(200).json(data);
   });
 };

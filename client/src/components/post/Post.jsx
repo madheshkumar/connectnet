@@ -13,7 +13,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { AuthContext, checkImageURL } from "../../context/AuthContext";
 import { makeRequest } from "../../axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery,useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Post = ({ post }) => {
   const { currentUser } = useContext(AuthContext);
@@ -26,6 +26,18 @@ const Post = ({ post }) => {
   const [likes, setLikes] = useState(0);
 
   const [showOptions, setShowOptions] = useState(false);
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: () => makeRequest.get("/posts"),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["posts"]);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const fetchLikes = async () => {
     try {
@@ -118,7 +130,7 @@ const Post = ({ post }) => {
   const handleDelete = async() => {
     try{
       await makeRequest.delete(`/posts/${post.id}`);
-      window.location.reload();
+      mutation.mutate();
     }catch(err){
       console.log(err);
     } 

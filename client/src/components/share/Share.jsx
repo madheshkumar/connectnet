@@ -68,7 +68,14 @@ const Share = () => {
       console.log(err);
     }
   };
-
+  const handleEnter = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const { selectionStart, selectionEnd } = e.target;
+      const newText = desc.slice(0, selectionStart) + '\n'+ desc.slice(selectionEnd);
+      setDesc(newText);
+    }
+  };
   const handleRemove = () => {
     setFile(null);
   };
@@ -77,26 +84,27 @@ const Share = () => {
     <div className="share">
       <canvas id="canvas" style={{ display: "none" }}></canvas>
       <div className="container">
-        <div className="shareTop">
-          <div className="shareLeft">
-            <div className="userImg">
-              {checkImageURL(currentUser.profilepic) ? (
-                <img
-                  src={".././profileimages/" + currentUser.profilepic}
-                  alt="img"
-                />
-              ) : (
-                <PersonIcon id="defaultprofile" />
-              )}
-            </div>
+        <div className="shareLeft">
+          <div className="userImg">
+            {checkImageURL(currentUser.profilepic) ? (
+              <img
+                src={".././profileimages/" + currentUser.profilepic}
+                alt="img"
+              />
+            ) : (
+              <PersonIcon id="defaultprofile" />
+            )}
           </div>
-          <div className="shareRight">
+        </div>
+        <div className="shareRight">
+          <div className="shareTop">
             <input
               type="text"
               className="textInput"
               placeholder={`Share your thoughts... `}
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
+              onKeyDown={handleEnter}
             ></input>
             <input
               type="file"
@@ -108,50 +116,66 @@ const Share = () => {
               <img className="icon" src={Image} alt="img" />
               <span>add</span>
             </label>
-            <button className="sharebtn" onClick={handleClick}>
+            <button
+              className="sharebtn"
+              onClick={handleClick}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleClick(e);
+                }
+              }}
+            >
               Share
             </button>
           </div>
-        </div>
-        <div className="shareBottom">
-          {desc || file ? (
-            <div className="preview">
-              <h3>Preview</h3>
-              <div className="previewcontainer">
-                {desc && (
-                  <div className="previewdesc">
-                    <span id="descTitle">Description</span>
-                    <p>{desc}</p>
-                  </div>
-                )}
-                {file && (
-                  <div className="uploadedfilepreview">
-                    <div id="imgcontainer">
-                    {file.type.startsWith("video/") ? (
-                      <video
-                        className="videoFile"
-                        src={URL.createObjectURL(file)}
-                        alt=""
-                        autoPlay
-                        loop
-                      ></video>
-                    ) : (
-                      // eslint-disable-next-line jsx-a11y/alt-text
-                      <img
-                        className="imgFile"
-                        src={URL.createObjectURL(file)}
-                      />
-                    )}
-                    <button id="removebtn" title="remove" onClick={handleRemove}>-</button>
+
+          <div className="shareBottom">
+            {desc || file ? (
+              <div className="preview">
+                <h3>Preview</h3>
+                <div className="previewcontainer">
+                  {desc && (
+                    <div className="previewdesc">
+                      <span id="descTitle">Description</span>
+                      <p>{desc}</p>
                     </div>
-                    <p> {file.name}</p>
-                  </div>
-                )}
+                  )}
+                  {file && (
+                    <div className="uploadedfilepreview">
+                      <div id="imgcontainer">
+                        {file.type.startsWith("video/") ? (
+                          <video
+                            className="videoFile"
+                            src={URL.createObjectURL(file)}
+                            alt=""
+                            autoPlay
+                            loop
+                          ></video>
+                        ) : (
+                          // eslint-disable-next-line jsx-a11y/alt-text
+                          <img
+                            className="imgFile"
+                            src={URL.createObjectURL(file)}
+                          />
+                        )}
+                        <button
+                          id="removebtn"
+                          title="remove"
+                          onClick={handleRemove}
+                        >
+                          -
+                        </button>
+                      </div>
+                      <p> {file.name}</p>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ) : (
-            ""
-          )}
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </div>
     </div>

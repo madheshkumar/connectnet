@@ -33,13 +33,13 @@
         flex-direction: column;
         gap: 10px;
         height: max-content;
-        max-height: 10vh;
+        height: 10vh;
         overflow-y: scroll;
         &::-webkit-scrollbar {
           display: none;
         }
       }
-      .user {
+      .user{
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -112,6 +112,16 @@
               transition: ease-in-out 0.2s;
             }
           }
+        }
+      }
+      .activityContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 20vh;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
         }
       }
     }

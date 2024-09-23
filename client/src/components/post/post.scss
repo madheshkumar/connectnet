@@ -21,7 +21,6 @@
         flex: 5;
         .userImg {
           display: flex;
-
           align-items: center;
           justify-content: center;
           background-color: #1f5ba0;
@@ -98,6 +97,11 @@
 
     .content {
       margin: 20px 0;
+      p{
+        font-size: 1.2rem;
+        color: #123a52;
+        font-family: 'Trebuchet MS', sans-serif;
+      }
       img {
         background-color: white;
         width: 100%;

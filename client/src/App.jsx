@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./app.css";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -27,8 +27,8 @@ import {
 
 import { io } from "socket.io-client";
 
-export const socket = io.connect("http://localhost:8800");
 
+export const socket = io.connect("http://localhost:8800");
 
 function App() {
   const { currentUser } = useContext(AuthContext);

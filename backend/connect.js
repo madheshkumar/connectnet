@@ -5,10 +5,10 @@ dotenv.config();
 
 export const db = mysql.createConnection({
   // host: 'db',
-  host: '127.0.0.1',
+  host: "127.0.0.1",
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
-  database: 'connectnet'
+  database: "connectnet",
 });
 
 db.connect((err) => {
@@ -102,7 +102,7 @@ const query5 =
   " ON DELETE CASCADE" +
   " ON UPDATE CASCADE," +
   " CONSTRAINT `like_postid`" +
-   " FOREIGN KEY (`postid`)" +
+  " FOREIGN KEY (`postid`)" +
   " REFERENCES `connectnet`.`posts` (`id`)" +
   " ON DELETE CASCADE" +
   " ON UPDATE CASCADE);";
@@ -129,6 +129,22 @@ const query6 =
   " ON DELETE CASCADE" +
   " ON UPDATE CASCADE);";
 
+  // activities table
+const query7 =
+  "CREATE TABLE IF NOT EXISTS `connectnet`.`activities` (" +
+  " `id` INT NOT NULL AUTO_INCREMENT," +
+  " `userid` INT NOT NULL," +
+  " `activity` JSON NOT NULL," +
+  " `time` DATETIME NOT NULL," +
+  " PRIMARY KEY (`id`)," +
+  " UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE," +
+  " INDEX `activity_user_idx` (`userid` ASC) VISIBLE," +
+  " CONSTRAINT `activity_user`" +
+  " FOREIGN KEY (`userid`)" +
+  " REFERENCES `connectnet`.`users` (`id`)" +
+  " ON DELETE CASCADE" +
+  " ON UPDATE CASCADE);";
+
 db.query(query1, (err, result) => {
   if (err) console.log(err);
 });
@@ -150,6 +166,10 @@ db.query(query5, (err, result) => {
 });
 
 db.query(query6, (err, result) => {
+  if (err) console.log(err);
+});
+
+db.query(query7, (err, result) => {
   if (err) console.log(err);
 });
 

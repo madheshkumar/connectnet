@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
 
+
 export const ActivitiesContext = createContext();
 
 /* Activities
@@ -39,13 +40,7 @@ export const ActivitiesContext = createContext();
 10. Delete a comment
 
 12. Delete a friend request
-
-14. 
 */
-
-const Activitytypes = [
-
-]
 
 
 // Activities component
@@ -53,27 +48,25 @@ export const ActivitiesContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
   const [Activities, setActivities] = useState([]);
 
-  useEffect(() => {
-    const fetchActivities = async () => {
-      try {
-        const res = await axios.get(
-          `http://localhost:8800/api/activities/${currentUser.id}`
-        );
-        setActivities(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchActivities();
-  }, [currentUser.id]);
-
-  const logActivity = async (activity) => {
+  const fetchActivities = async () => {
     try {
-      const res = await axios.post(
-        "http://localhost:8800/api/activities/",
-        activity
+      const res = await axios.get(
+        `http://localhost:8800/api/activities/${currentUser.id}`
       );
-      setActivities([...Activities, res.data]);
+      setActivities(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const logActivity = async (userId, activity) => {
+    try {
+      activity = JSON.stringify(activity);
+      const res = await axios.post("http://localhost:8800/api/activities/", {
+        activity,
+        userId,
+      });
+      fetchActivities();
     } catch (err) {
       console.log(err);
     }
@@ -88,10 +81,13 @@ export const ActivitiesContextProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    fetchActivities();
+  }, [currentUser]);
+
+
   return (
-    <ActivitiesContext.Provider
-      value={{ Activities, setActivities, logActivity, deleteActivity }}
-    >
+    <ActivitiesContext.Provider value={{ Activities, fetchActivities, logActivity, deleteActivity }}>
       {children}
     </ActivitiesContext.Provider>
   );

@@ -3,6 +3,7 @@ import "./rightbar.scss";
 
 import PersonIcon from "@mui/icons-material/Person";
 import { Chatbox } from "../chatbox/Chatbox";
+import { Activity } from "../activity/Activity";
 
 import { AuthContext, checkImageURL } from "../../context/AuthContext";
 import { ActivitiesContext } from "../../context/ActivitiesContext";
@@ -11,24 +12,41 @@ import { socket } from "../../App";
 
 const Rightbar = () => {
   const { currentUser, getFriends } = useContext(AuthContext);
-  const { Activities, setActivities } = useContext(ActivitiesContext);
+  const { Activities, fetchActivities, logActivity } =
+    useContext(ActivitiesContext);
 
   const [isUser, setUser] = useState(null);
   const [newUsers, setNewUsers] = useState([]);
   const [Friends, setFriends] = useState([]);
 
-
   const handleAddFunction = (e) => {
     const receiverId = parseInt(e.target.closest(".user").dataset.id);
     socket.emit("addFriend", { receiverId, senderId: currentUser.id });
     setNewUsers(newUsers.filter((user) => user.id !== receiverId));
-    setActivities([...Activities, { activity: "Friend request sent", userId: currentUser.id, friendId: receiverId }]);
+    logActivity(currentUser.id, {
+      activitytype: "friendRequest",
+      userId: currentUser.id,
+      friendId: receiverId,
+      status: "pending",
+    });
+    logActivity(receiverId, {
+      activitytype: "friendRequest",
+      userId: currentUser.id,
+      friendId: receiverId,
+      status: "pending",
+    });
   };
 
   const handleRemoveFunction = (e) => {
     const receiverId = e.target.closest(".user").dataset.id;
     setNewUsers(newUsers.filter((user) => user.id !== receiverId));
   };
+
+  useEffect(() => {
+    socket.on("receiveFriendRequest", ({ senderId }) => {
+      fetchActivities();
+    });
+  }, [currentUser.id, Activities, fetchActivities]);
 
   const fetchFriends = async () => {
     try {
@@ -44,15 +62,6 @@ const Rightbar = () => {
     return res.data;
   };
 
-  useEffect(() => {
-    fetchFriends();
-    suggestFriends();
-  }, [currentUser]);
-
-
-
-  // console.log(isUser, Friends);
-
   const handleClick = (e) => {
     const userId = e.target.closest(".user").dataset.id;
     makeRequest.get("/users/find/" + userId).then((res) => {
@@ -62,27 +71,26 @@ const Rightbar = () => {
 
   const suggestFriends = async () => {
     const users = await fetchUsers();
-    const newUsers = users.filter(
-      (user) =>
-        user.id !== currentUser.id &&
-        user.id !== Friends.map((friend) => friend.id)
-    );
+
+    const newUsers = users.filter((user) => {
+      const isFriend = Friends.some((friend) => friend.id === user.id);
+      const hasPendingRequest = Activities.some((act) =>
+        act.activity.status === "pending" &&
+        act.activity.activitytype === "friendRequest"
+          ? act.activity.userId === user.id || act.activity.friendId === user.id
+          : false
+      );
+
+      return user.id !== currentUser.id && !isFriend && !hasPendingRequest;
+    });
+    console.log("suggested users " + newUsers.map((user) => user.id));
     setNewUsers(newUsers);
   };
 
   useEffect(() => {
+    fetchFriends();
     suggestFriends();
-  }, [Friends]);
-
-  useEffect(() => {
-    socket.on("receiveFriendRequest", ({ senderId }) => {
-      setActivities([...Activities, { activity: "Friend request received", userId: currentUser.id, friendId: senderId }]);
-    });
-  }, [currentUser.id,Activities]);
-
-  useEffect(() => {
-    console.log("Activities updated:", Activities);
-  }, [Activities]);
+  }, [Activities, Friends]);
 
   return (
     <div className="rightbar">
@@ -115,59 +123,14 @@ const Rightbar = () => {
         </div>
         <div className="item">
           <span>Latest Activities</span>
-          <div className="user">
-            <div className="userinfo">
-              <div className="userImg">
-                {checkImageURL(currentUser.profilepic) ? (
-                  <img
-                    src={".././profileimages/" + currentUser.profilepic}
-                    alt="img"
-                  />
-                ) : (
-                  <PersonIcon id="defaultprofile" />
-                )}
-              </div>
-              <p>
-                <span>Name</span> changed their profile picture
-              </p>
-            </div>
-            <span>1 min ago</span>
-          </div>
-          <div className="user">
-            <div className="userinfo">
-              <div className="userImg">
-                {checkImageURL(currentUser.profilepic) ? (
-                  <img
-                    src={".././profileimages/" + currentUser.profilepic}
-                    alt="img"
-                  />
-                ) : (
-                  <PersonIcon id="defaultprofile" />
-                )}
-              </div>
-              <p>
-                <span>Name</span> changed their profile picture
-              </p>
-            </div>
-            <span>1 min ago</span>
-          </div>
-          <div className="user">
-            <div className="userinfo">
-              <div className="userImg">
-                {checkImageURL(currentUser.profilepic) ? (
-                  <img
-                    src={".././profileimages/" + currentUser.profilepic}
-                    alt="img"
-                  />
-                ) : (
-                  <PersonIcon id="defaultprofile" />
-                )}
-              </div>
-              <p>
-                <span>Name</span> changed their profile picture
-              </p>
-            </div>
-            <span>1 min ago</span>
+          <div className="activityContainer">
+            {Activities.length > 0 ? (
+              Activities.map((activity) => (
+                <Activity activity={activity} key={activity.id} />
+              ))
+            ) : (
+              <div>No activities available</div>
+            )}
           </div>
         </div>
 

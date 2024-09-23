@@ -21,6 +21,16 @@ export const getPosts = (req, res) => {
   });
 };
 
+export const getPost = (req, res) => {
+  const q = "SELECT * FROM posts WHERE id = ?;";
+
+  db.query(q, req.params.postId, (err, data) => {
+    if (err) return res.status(500).json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
 export const addPosts = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");

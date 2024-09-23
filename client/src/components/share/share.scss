@@ -9,136 +9,144 @@
     border-radius: 10px;
     overflow: hidden;
     background-color: white;
-    .shareTop {
+    display: flex;
+    
+    .shareLeft {
       display: flex;
-      .shareLeft {
+      align-items: center;
+      background-color: #1d4e61;
+      padding: 40px 20px;
+      .userImg {
         display: flex;
-        align-items: center;
-        background-color: #1d5761;
-        padding: 15px;
-
-        .userImg {
-          display: flex;
-          align-self: center;
-          justify-content: center;
-
-          img {
-            image-rendering: pixelated;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            background-color: white;
-          }
-          #defaultprofile {
-            padding: 5px;
-            font-size: 30px;
-            color: #ffffff;
-          }
+        align-self: flex-start;
+        justify-content: center;
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+          background-color: white;
+        }
+        #defaultprofile {
+          padding: 5px;
+          font-size: 30px;
+          color: #ffffff;
         }
       }
-      .shareRight {
-        padding: 10px 20px;
-        width: 100%;
+    }
+    .shareRight {
+      display: flex;
+      flex-flow: column;
+      width: 100%;
+
+      .shareTop {
+        display: flex;
+        padding: 30px 20px; 
         display: flex;
         flex-direction: row;
-        justify-content: center;
         align-items: center;
         gap: 20px;
-        height: 10vh;
         border-radius: 10px;
         .textInput {
+          width:100%;
           background-color: transparent;
-          width: 100%;
+          color: #021029;
           padding: 20px 10px;
           border: none;
           outline: none;
-          border-bottom: 2px #1d5761 solid;
-          font-size: 16px;
-          font-family: sans-serif;
+          border-bottom: 2px #1d4e61 solid;
+          font: 1.1rem sans-serif;
         }
         .shareImg {
           display: flex;
           flex-direction: column;
           align-items: center;
-
+          position: relative;
           .icon {
             width: 50px;
             height: 50px;
             object-fit: cover;
             cursor: pointer;
           }
+          span{
+            position: absolute;
+            color:#817f7f;
+            font: 1.2rem large bold;
+            bottom:5px;
+            opacity: 0.5;
+          }
         }
-
         .sharebtn {
-          background-color: #1d5761;
+          background-color: #1d4e61;
           color: white;
-          padding: 15px 20px;
+          padding: 15px 15px;
           border: none;
-          border-radius: 10px;
+          border-radius:10px;
           cursor: pointer;
+          font: 1em sans-serif;
         }
       }
-    }
-    .shareBottom {
-      .preview {
-        display: flex;
-        flex-direction: column;
+      .shareBottom {
         
-        h3{
-          align-self: center;
-          font-size: 1.5rem;
-          color:#1d5761;
-        }
-        .previewcontainer {
+        .preview {
           display: flex;
-          gap: 20px;
-          padding: 2%;
-          .previewdesc {
-            display: flex;
-            flex-direction: column;
-            width: 80%;
-            font-size: 1.2rem;
-            color: #444849;
-            span{
-              font-size: 1.3rem;
-              color: #125b68;
-            }
+          flex-direction: column;
+          
+          h3 {
+            align-self: center;
+            font-size: 1.5rem;
+            color: #1d5761;
           }
-          .uploadedfilepreview {
+          .previewcontainer {
             display: flex;
-            flex-direction: column;
-            padding: 10px;
-            align-items: center;
             gap: 20px;
-            #imgcontainer{
+            padding: 2%;
+            .previewdesc {
               display: flex;
+              width: 100%;
+              flex-direction: column;
+              font-size: 1.2rem;
+              color: #444849;
+              span {
+                font-size: 1.3rem;
+                color: #125b68;
+              }
+            }
+            .uploadedfilepreview {
+              display: flex;
+              flex-direction: column;
+              padding: 10px;
               align-items: center;
-              gap:10px;
-            .videoFile {
-              width: 100px;
-              height: 100px;
-              object-fit: contain;
-            }
-            .imgFile {
-              width: 100px;
-              object-fit: contain;
-            }
-            #removebtn{
-              padding: 0px 10px;
-              background-color: rgb(199, 77, 77);
-              border: none;
-              border-radius: 2px;
-              color: white;
-              font-size: 1.5rem;
-              font-weight: bold;
-            }
-          }
-            p {
-              color: #1d5761;
-              font-weight: bold;
-              font-size: 16px;
-              font-family: sans-serif;
+              gap: 20px;
+              #imgcontainer {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .videoFile {
+                  width: 100px;
+                  height: 100px;
+                  object-fit: contain;
+                }
+                .imgFile {
+                  width: 100px;
+                  object-fit: contain;
+                }
+                #removebtn {
+                  padding: 0px 10px;
+                  background-color: rgb(199, 77, 77);
+                  border: none;
+                  border-radius: 2px;
+                  color: white;
+                  font-size: 1.5rem;
+                  font-weight: bold;
+                }
+              }
+              p {
+                color: #1d5761;
+                font-weight: bold;
+                font-size: 16px;
+                font-family: sans-serif;
+              }
             }
           }
         }
